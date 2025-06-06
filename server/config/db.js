@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import products from '../data/products.js';
 import Product from '../models/productModel.js';
 
+// This is for .env
 dotenv.config();
 
 const connectDB = async () => {
