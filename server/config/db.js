@@ -7,18 +7,15 @@ dotenv.config();
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/projecteco');
-    console.log(`MongoDB Connected successfully`);//: ${conn.connection.host}`);
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
-    // Check if products exist
-    const productCount = await Product.countDocuments();
-    if (productCount === 0) {
-      // Seed products
-      await Product.insertMany(products);
-      console.log('Products seeded successfully');
-    }
+    console.log('✅ MongoDB Atlas Connected Successfully');
+    
   } catch (error) {
-    console.error(`Error: ${error.message}`);
+    console.error(`❌ MongoDB Atlas Connection Error: ${error.message}`);
     process.exit(1);
   }
 };
